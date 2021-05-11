@@ -17,29 +17,29 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        KC_DELETE, KC_ESC, KC_F11,
-        TO(0), KC_UP, TO(1),
-        KC_LEFT, KC_DOWN, KC_RIGHT	
+        KC_RALT, RGB_MOD, KC_MPLY,
+        TO(1), KC_MUTE, TO(0),
+        KC_MEDIA_PREV_TRACK, KC_MPLY, KC_MEDIA_NEXT_TRACK
     ),
-	[1] = LAYOUT(
-        KC_SELECT, KC_DELETE, KC_MPLY,
-        TO(0), KC_MUTE, TO(1),
-        KC_MEDIA_REWIND, KC_MPLY, KC_MEDIA_FAST_FORWARD	
+    [1] = LAYOUT(
+        KC_RALT, RGB_MOD, KC_F11,
+        TO(1), KC_UP, TO(0),
+        KC_LEFT, KC_DOWN, KC_RIGHT
     ),
 };
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-	if (biton32(layer_state) == 0) {
-		if (clockwise) {
+    if (biton32(layer_state) == 1) {
+        if (clockwise) {
             tap_code(KC_PGUP);
         } else {
             tap_code(KC_PGDOWN);
         }
-	}else if (biton32(layer_state) == 1) {	
+    }else if (biton32(layer_state) == 0) {
         if (clockwise) {
-            tap_code(KC__VOLUP);
+            tap_code(KC_AUDIO_VOL_UP);
         } else {
-            tap_code(KC__VOLDOWN);
+            tap_code(KC_AUDIO_VOL_DOWN);
         }
-	}
+    }
 }
